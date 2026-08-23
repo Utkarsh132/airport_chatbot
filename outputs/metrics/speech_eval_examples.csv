@@ -1,0 +1,6 @@
+file,ground_truth,hypothesis,engine,wer,notes
+audio_001.wav,Where is gate B12?,Where is gate B12?,stub,0.0,"Clear speech, quiet room"
+audio_002.wav,How do I get to baggage claim?,How do I get to baggage claim?,stub,0.0,Slight background noise
+audio_003.wav,Is there a lounge near terminal 2?,Is there a lounge near terminal 2?,stub,0.0,Non-native accent
+audio_004.wav,Where is the nearest information desk?,Where is the nearest information desk?,stub,0.0,"Short query, fast speech"
+audio_005.wav,Is my flight delayed?,Is my flight delayed?,stub,0.0,"Recorded via phone mic, airport ambience"

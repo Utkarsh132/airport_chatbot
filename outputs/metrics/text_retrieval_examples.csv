@@ -1,0 +1,28 @@
+text,true_kb_id,predicted_kb_id,correct
+Where is gate B12?,KB001,KB001,True
+Can you tell me how to get to gate A5?,KB008,KB001,False
+How do I get to baggage claim?,KB003,KB003,True
+Where do I pick up my luggage?,KB003,KB020,False
+Where is the check in desk for international flights?,KB002,KB002,True
+"I need to check in for my flight, where do I go?",KB002,KB002,True
+Is there a lounge near terminal 2?,KB007,KB007,True
+Where can I relax before my flight in terminal 2?,KB007,KB002,False
+Where can I find airport transport?,KB010,KB010,True
+How do I get to the train station from the airport?,KB010,KB010,True
+Where is the taxi pickup zone?,KB011,KB011,True
+Where is the nearest information desk?,KB005,KB005,True
+"I lost my bag, where is lost and found?",KB006,KB006,True
+Where is security control?,KB004,KB004,True
+How long is the security line right now?,KB004,KB004,True
+Where can I pray at the airport?,KB008,KB010,False
+Is there a restaurant open now near gate B12?,KB009,KB001,False
+Where can I eat before my flight?,KB009,KB020,False
+Where is the nearest restroom?,KB013,KB013,True
+Is there a family room for changing my baby?,KB014,KB014,True
+Where is the pharmacy?,KB015,KB015,True
+Where can I find an ATM?,KB016,KB016,True
+Where do I go through passport control?,KB017,KB017,True
+Where is the shuttle bus stop?,KB018,KB018,True
+Where can I rent a car?,KB019,KB019,True
+"I need medical assistance, where should I go?",KB020,KB020,True
+"I need special assistance, I use a wheelchair.",KB012,KB012,True

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "audio_001.wav",
+    "transcript_ground_truth": "Where is gate B12?",
+    "speaker": "sample_1",
+    "notes": "Clear speech, quiet room"
+  },
+  {
+    "file": "audio_002.wav",
+    "transcript_ground_truth": "How do I get to baggage claim?",
+    "speaker": "sample_2",
+    "notes": "Slight background noise"
+  },
+  {
+    "file": "audio_003.wav",
+    "transcript_ground_truth": "Is there a lounge near terminal 2?",
+    "speaker": "sample_3",
+    "notes": "Non-native accent"
+  },
+  {
+    "file": "audio_004.wav",
+    "transcript_ground_truth": "Where is the nearest information desk?",
+    "speaker": "sample_4",
+    "notes": "Short query, fast speech"
+  },
+  {
+    "file": "audio_005.wav",
+    "transcript_ground_truth": "Is my flight delayed?",
+    "speaker": "sample_5",
+    "notes": "Recorded via phone mic, airport ambience"
+  }
+]

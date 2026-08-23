@@ -1,0 +1,6 @@
+scenario,matched_service,confidence,uncertain,rationale
+text_only,Gate B12,1.0,False,Text/voice query matched intent 'find_gate' with retrieval score 1.00.
+image_only,Gate B12,1.0,False,Image classified as category 'gate' with similarity score 1.00.
+voice_only_stub,Gate B12,1.0,False,Text/voice query matched intent 'find_gate' with retrieval score 1.00.
+image_plus_text,Gate B12,1.0,False,Text/voice query matched intent 'find_gate' with retrieval score 0.84. Image category 'gate' agrees with text intent -> confidence boosted to 1.00.
+voice_plus_image_stub,Gate B12,1.0,False,Text/voice query matched intent 'find_gate' with retrieval score 1.00. Image category 'gate' agrees with text intent -> confidence boosted to 1.00.

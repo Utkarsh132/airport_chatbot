@@ -1,0 +1,196 @@
+[
+  {
+    "text": "Where is gate B12?",
+    "intent": "find_gate",
+    "entities": {
+      "gate": "B12"
+    },
+    "kb_id": "KB001"
+  },
+  {
+    "text": "Can you tell me how to get to gate A5?",
+    "intent": "find_gate",
+    "entities": {
+      "gate": "A5"
+    },
+    "kb_id": "KB008"
+  },
+  {
+    "text": "How do I get to baggage claim?",
+    "intent": "baggage_claim",
+    "entities": {},
+    "kb_id": "KB003"
+  },
+  {
+    "text": "Where do I pick up my luggage?",
+    "intent": "baggage_claim",
+    "entities": {},
+    "kb_id": "KB003"
+  },
+  {
+    "text": "Where is the check in desk for international flights?",
+    "intent": "check_in",
+    "entities": {},
+    "kb_id": "KB002"
+  },
+  {
+    "text": "I need to check in for my flight, where do I go?",
+    "intent": "check_in",
+    "entities": {},
+    "kb_id": "KB002"
+  },
+  {
+    "text": "Is there a lounge near terminal 2?",
+    "intent": "lounge",
+    "entities": {
+      "terminal": "Terminal 2"
+    },
+    "kb_id": "KB007"
+  },
+  {
+    "text": "Where can I relax before my flight in terminal 2?",
+    "intent": "lounge",
+    "entities": {
+      "terminal": "Terminal 2"
+    },
+    "kb_id": "KB007"
+  },
+  {
+    "text": "Where can I find airport transport?",
+    "intent": "transport",
+    "entities": {},
+    "kb_id": "KB010"
+  },
+  {
+    "text": "How do I get to the train station from the airport?",
+    "intent": "transport",
+    "entities": {},
+    "kb_id": "KB010"
+  },
+  {
+    "text": "Where is the taxi pickup zone?",
+    "intent": "transport",
+    "entities": {},
+    "kb_id": "KB011"
+  },
+  {
+    "text": "Where is the nearest information desk?",
+    "intent": "information_desk",
+    "entities": {},
+    "kb_id": "KB005"
+  },
+  {
+    "text": "I lost my bag, where is lost and found?",
+    "intent": "lost_and_found",
+    "entities": {},
+    "kb_id": "KB006"
+  },
+  {
+    "text": "Is my flight delayed?",
+    "intent": "flight_status",
+    "entities": {},
+    "kb_id": null
+  },
+  {
+    "text": "What time does flight LH123 depart?",
+    "intent": "flight_status",
+    "entities": {
+      "flight": "LH123"
+    },
+    "kb_id": null
+  },
+  {
+    "text": "Where is security control?",
+    "intent": "security",
+    "entities": {},
+    "kb_id": "KB004"
+  },
+  {
+    "text": "How long is the security line right now?",
+    "intent": "security",
+    "entities": {},
+    "kb_id": "KB004"
+  },
+  {
+    "text": "Where can I pray at the airport?",
+    "intent": "prayer_room",
+    "entities": {},
+    "kb_id": "KB008"
+  },
+  {
+    "text": "Is there a restaurant open now near gate B12?",
+    "intent": "restaurant",
+    "entities": {
+      "gate": "B12"
+    },
+    "kb_id": "KB009"
+  },
+  {
+    "text": "Where can I eat before my flight?",
+    "intent": "restaurant",
+    "entities": {},
+    "kb_id": "KB009"
+  },
+  {
+    "text": "Where is the nearest restroom?",
+    "intent": "restroom",
+    "entities": {},
+    "kb_id": "KB013"
+  },
+  {
+    "text": "Is there a family room for changing my baby?",
+    "intent": "family_room",
+    "entities": {},
+    "kb_id": "KB014"
+  },
+  {
+    "text": "Where is the pharmacy?",
+    "intent": "pharmacy",
+    "entities": {},
+    "kb_id": "KB015"
+  },
+  {
+    "text": "Where can I find an ATM?",
+    "intent": "atm",
+    "entities": {},
+    "kb_id": "KB016"
+  },
+  {
+    "text": "Where do I go through passport control?",
+    "intent": "immigration",
+    "entities": {},
+    "kb_id": "KB017"
+  },
+  {
+    "text": "Where is the shuttle bus stop?",
+    "intent": "transport",
+    "entities": {},
+    "kb_id": "KB018"
+  },
+  {
+    "text": "Where can I rent a car?",
+    "intent": "car_rental",
+    "entities": {},
+    "kb_id": "KB019"
+  },
+  {
+    "text": "I need medical assistance, where should I go?",
+    "intent": "medical_assistance",
+    "entities": {},
+    "kb_id": "KB020"
+  },
+  {
+    "text": "I need special assistance, I use a wheelchair.",
+    "intent": "special_assistance",
+    "entities": {},
+    "kb_id": "KB012"
+  },
+  {
+    "text": "Where is gate C3?",
+    "intent": "find_gate",
+    "entities": {
+      "gate": "C3"
+    },
+    "kb_id": null
+  }
+]

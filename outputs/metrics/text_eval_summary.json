@@ -1,0 +1,7 @@
+{
+  "intent_precision": 0.975,
+  "intent_recall": 0.9333333333333333,
+  "intent_f1": 0.9412698412698413,
+  "retrieval_accuracy": 0.7777777777777778,
+  "n_retrieval_samples": 27
+}
