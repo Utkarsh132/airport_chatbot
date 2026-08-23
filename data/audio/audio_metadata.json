@@ -2,31 +2,129 @@
   {
     "file": "audio_001.wav",
     "transcript_ground_truth": "Where is gate B12?",
+    "intent": "find_gate",
+    "kb_id": "KB001",
     "speaker": "sample_1",
     "notes": "Clear speech, quiet room"
   },
   {
     "file": "audio_002.wav",
     "transcript_ground_truth": "How do I get to baggage claim?",
+    "intent": "baggage_claim",
+    "kb_id": "KB003",
     "speaker": "sample_2",
     "notes": "Slight background noise"
   },
   {
     "file": "audio_003.wav",
     "transcript_ground_truth": "Is there a lounge near terminal 2?",
+    "intent": "lounge",
+    "kb_id": "KB007",
     "speaker": "sample_3",
     "notes": "Non-native accent"
   },
   {
     "file": "audio_004.wav",
     "transcript_ground_truth": "Where is the nearest information desk?",
+    "intent": "information_desk",
+    "kb_id": "KB005",
     "speaker": "sample_4",
     "notes": "Short query, fast speech"
   },
   {
     "file": "audio_005.wav",
     "transcript_ground_truth": "Is my flight delayed?",
+    "intent": "flight_status",
+    "kb_id": null,
     "speaker": "sample_5",
-    "notes": "Recorded via phone mic, airport ambience"
+    "notes": "Recorded via phone mic, airport ambience. Out-of-scope query."
+  },
+  {
+    "file": "audio_006.wav",
+    "transcript_ground_truth": "Where is the nearest restroom?",
+    "intent": "restroom",
+    "kb_id": "KB013",
+    "speaker": "tts_macos_say",
+    "notes": "Generated with macOS built-in text-to-speech for multimodal restroom test"
+  },
+  {
+    "file": "audio_007.wav",
+    "transcript_ground_truth": "Where is the duty-free shop?",
+    "intent": "duty_free",
+    "kb_id": "KB021",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_008.wav",
+    "transcript_ground_truth": "Where can I exchange money?",
+    "intent": "currency_exchange",
+    "kb_id": "KB022",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_009.wav",
+    "transcript_ground_truth": "Where can I charge my phone?",
+    "intent": "charging_station",
+    "kb_id": "KB023",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_010.wav",
+    "transcript_ground_truth": "I have a connecting flight, where do I go?",
+    "intent": "transit_connection",
+    "kb_id": "KB032",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_011.wav",
+    "transcript_ground_truth": "Where is the smoking area?",
+    "intent": "smoking_area",
+    "kb_id": "KB024",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_012.wav",
+    "transcript_ground_truth": "Where is the customs desk?",
+    "intent": "customs",
+    "kb_id": "KB026",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_013.wav",
+    "transcript_ground_truth": "Can you book a flight for me?",
+    "intent": "out_of_scope",
+    "kb_id": null,
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated. Out-of-scope refusal test."
+  },
+  {
+    "file": "audio_014.wav",
+    "transcript_ground_truth": "Where can I park my car?",
+    "intent": "parking",
+    "kb_id": "KB025",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_015.wav",
+    "transcript_ground_truth": "Where is the transfer desk?",
+    "intent": "transfer_desk",
+    "kb_id": "KB032",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
+  },
+  {
+    "file": "audio_016.wav",
+    "transcript_ground_truth": "Is there a play area for children?",
+    "intent": "kids_play_area",
+    "kb_id": "KB034",
+    "speaker": "tts_macos_samantha",
+    "notes": "TTS generated, clear speech"
   }
 ]

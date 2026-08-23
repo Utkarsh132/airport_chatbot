@@ -15,6 +15,12 @@ import numpy as np
 from config import USE_SENTENCE_TRANSFORMERS, SENTENCE_MODEL_NAME
 from utils import clean_text
 
+try:
+    from rapidfuzz import fuzz, process as rf_process
+    _RAPIDFUZZ_AVAILABLE = True
+except Exception:
+    _RAPIDFUZZ_AVAILABLE = False
+
 _sentence_model = None
 _tfidf_vectorizer = None
 
@@ -22,6 +28,63 @@ STOPWORDS = {
     "a", "an", "the", "is", "are", "am", "do", "does", "did", "i", "you", "my",
     "to", "of", "in", "on", "at", "for", "please", "can", "could", "there",
 }
+
+# Extra vocabulary for typo correction -- airport terms + common query words.
+_EXTRA_VOCAB = {
+    "where", "is", "how", "do", "i", "get", "to", "find", "near", "located",
+    "location", "help", "please", "flight", "departure", "arrival", "terminal",
+    "nearest", "closest", "directions", "open", "hours", "accessible",
+    "wheelchair", "passport", "customs", "screening",
+}
+
+
+def _build_domain_vocabulary() -> set:
+    """Words that directly drive intent matching -- corrected against FIRST
+    so domain terms (gate, baggage, security...) win over generic words."""
+    vocab = set()
+    for keywords in INTENT_KEYWORDS.values():
+        for kw in keywords:
+            for tok in kw.split():
+                vocab.add(tok)
+    return vocab
+
+
+def _build_vocabulary() -> set:
+    return _build_domain_vocabulary() | set(_EXTRA_VOCAB)
+
+
+def correct_typos(text: str, score_cutoff: int = 78) -> str:
+    """
+    Fuzzy spell-correction against a domain vocabulary using rapidfuzz.
+    Domain-critical words (gate, baggage, security, etc.) are checked FIRST
+    and with a slightly lower threshold, so misspellings like "gaet" resolve
+    to "gate" rather than a generic word like "get". Only replaces a token
+    when a close-enough match is found; otherwise the original token is kept
+    (preserving gate codes, flight numbers, and truly unknown words).
+    """
+    if not _RAPIDFUZZ_AVAILABLE:
+        return text
+
+    domain_vocab = _build_domain_vocabulary()
+    full_vocab = _build_vocabulary()
+    tokens = text.split()
+    corrected_tokens = []
+    for tok in tokens:
+        if len(tok) < 3 or tok.isdigit() or tok in full_vocab:
+            corrected_tokens.append(tok)
+            continue
+
+        domain_match = rf_process.extractOne(tok, domain_vocab, scorer=fuzz.ratio, score_cutoff=score_cutoff - 3)
+        if domain_match:
+            corrected_tokens.append(domain_match[0])
+            continue
+
+        generic_match = rf_process.extractOne(tok, full_vocab, scorer=fuzz.ratio, score_cutoff=score_cutoff)
+        if generic_match:
+            corrected_tokens.append(generic_match[0])
+        else:
+            corrected_tokens.append(tok)
+    return " ".join(corrected_tokens)
 
 GATE_RE = re.compile(r"\b([a-dA-D]\s?-?\s?\d{1,3})\b")
 TERMINAL_RE = re.compile(r"\bterminal\s?(\d{1,2})\b", re.IGNORECASE)
@@ -84,12 +147,28 @@ def extract_entities(text: str) -> dict:
 
 
 def classify_intent_rule_based(text: str) -> str:
-    """Keyword-based intent classifier -- transparent and easy to explain in a viva."""
+    """Keyword-based intent classifier with typo-tolerant fuzzy fallback."""
     lowered = clean_text(text)
-    for intent, keywords in INTENT_KEYWORDS.items():
-        for kw in keywords:
-            if kw in lowered:
-                return intent
+    corrected = correct_typos(lowered)
+
+    for candidate_text in [lowered, corrected]:
+        for intent, keywords in INTENT_KEYWORDS.items():
+            for kw in keywords:
+                if kw in candidate_text:
+                    return intent
+
+    if _RAPIDFUZZ_AVAILABLE:
+        best_intent = "unknown"
+        best_score = 0
+        for intent, keywords in INTENT_KEYWORDS.items():
+            for kw in keywords:
+                score = fuzz.partial_ratio(corrected, kw)
+                if score > best_score:
+                    best_score = score
+                    best_intent = intent
+        if best_score >= 80:
+            return best_intent
+
     return "unknown"
 
 
@@ -139,13 +218,16 @@ def process_query(text: str) -> dict:
     Unified text-processing entrypoint used for BOTH typed queries and
     Whisper transcripts, guaranteeing identical downstream behavior.
     """
-    tokens = tokenize(text)
+    cleaned_text = clean_text(text)
+    corrected_text = correct_typos(cleaned_text)
+    tokens = tokenize(corrected_text)
     tokens_no_stop = remove_stopwords(tokens)
-    intent = classify_intent_rule_based(text)
+    intent = classify_intent_rule_based(corrected_text)
     entities = extract_entities(text)
     return {
         "raw_text": text,
-        "cleaned_text": clean_text(text),
+        "cleaned_text": cleaned_text,
+        "corrected_text": corrected_text,
         "tokens": tokens,
         "tokens_no_stopwords": tokens_no_stop,
         "intent": intent,

@@ -1,10 +1,23 @@
+# Python
 venv/
 .venv/
+.env/
 __pycache__/
 *.pyc
-.env
+*.pyo
 *.egg-info/
+
+# macOS
 .DS_Store
-outputs/*.png
-outputs/*.csv
-data/audio/*.wav
+
+# Extra / dev-only folder (logs, old venv, temp files)
+extra/
+
+# Temp audio files written by the app during inference
+outputs/predictions/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# pytest
+.pytest_cache/

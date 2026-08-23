@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "file": "audio_001.wav",
+      "ground_truth": "Where is gate B12?",
+      "whisper_output": "Where is gate B12?",
+      "wer": 0.0,
+      "notes": "Clear speech, quiet room",
+      "seconds": 0.52
+    },
+    {
+      "file": "audio_002.wav",
+      "ground_truth": "How do I get to baggage claim?",
+      "whisper_output": "How do I get to baggage claim?",
+      "wer": 0.0,
+      "notes": "Slight background noise",
+      "seconds": 0.23
+    },
+    {
+      "file": "audio_003.wav",
+      "ground_truth": "Is there a lounge near terminal 2?",
+      "whisper_output": "is their lounge near terminal 2.",
+      "wer": 0.286,
+      "notes": "Non-native accent",
+      "seconds": 0.23
+    },
+    {
+      "file": "audio_004.wav",
+      "ground_truth": "Where is the nearest information desk?",
+      "whisper_output": "Where is the nearest information desk?",
+      "wer": 0.0,
+      "notes": "Short query, fast speech",
+      "seconds": 0.23
+    },
+    {
+      "file": "audio_005.wav",
+      "ground_truth": "Is my flight delayed?",
+      "whisper_output": "is my flight delayed.",
+      "wer": 0.0,
+      "notes": "Recorded via phone mic, airport ambience",
+      "seconds": 0.21
+    }
+  ],
+  "avg_wer": 0.057199999999999994
+}

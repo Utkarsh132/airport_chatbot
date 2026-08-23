@@ -28,17 +28,17 @@ IMAGE_CATEGORIES = [
     "lounge", "transport", "information_desk", "restaurant",
 ]
 
-USE_CLIP = False
+USE_CLIP = True
 CLIP_MODEL_NAME = "openai/clip-vit-base-patch32"
 IMAGE_SIZE = 224
 
-USE_WHISPER = False
+USE_WHISPER = True
 WHISPER_MODEL_SIZE = "tiny"
 
 USE_SENTENCE_TRANSFORMERS = False
 SENTENCE_MODEL_NAME = "all-MiniLM-L6-v2"
 
-CONFIDENCE_LOW_THRESHOLD = 0.35
+CONFIDENCE_LOW_THRESHOLD = 0.20
 CONFIDENCE_HIGH_THRESHOLD = 0.65
 TOP_K_RETRIEVAL = 3
 

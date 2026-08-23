@@ -20,9 +20,9 @@ import numpy as np
 
 from config import TOP_K_RETRIEVAL
 from data_loader import load_knowledge_base, build_image_manifest
-from text_pipeline import embed_text
+from text_pipeline import embed_text, correct_typos
 from image_pipeline import embed_image
-from utils import cosine_similarity
+from utils import cosine_similarity, clean_text
 
 _FAISS_AVAILABLE = True
 try:
@@ -57,12 +57,13 @@ class KnowledgeBaseRetriever:
 
         if _FAISS_AVAILABLE:
             dim = self._text_vectors.shape[1]
-            index = faiss.IndexFlatIP(dim)  # inner product on normalized vectors ~ cosine
+            index = faiss.IndexFlatIP(dim)  # inner product on L2-normalised vectors == cosine similarity
             index.add(self._text_vectors)
             self._text_index = index
 
     def query_text(self, text: str, top_k: int = TOP_K_RETRIEVAL):
-        query_vec = embed_text(text, corpus_for_tfidf=[self._kb_text_repr(r) for _, r in self.kb_df.iterrows()])
+        normalized_text = correct_typos(clean_text(text))
+        query_vec = embed_text(normalized_text, corpus_for_tfidf=[self._kb_text_repr(r) for _, r in self.kb_df.iterrows()])
         query_vec = query_vec.astype(np.float32)
 
         if _FAISS_AVAILABLE and self._text_index is not None and query_vec.shape[0] == self._text_vectors.shape[1]:
@@ -75,7 +76,7 @@ class KnowledgeBaseRetriever:
                 results.append({"record": record, "score": float(score)})
             return results
 
-        # brute-force cosine fallback
+        # FAISS unavailable -- brute-force cosine similarity fallback
         sims = [cosine_similarity(query_vec, v) for v in self._text_vectors]
         order = np.argsort(sims)[::-1][:top_k]
         return [{"record": self.kb_df.iloc[i].to_dict(), "score": float(sims[i])} for i in order]

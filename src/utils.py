@@ -26,7 +26,16 @@ def cosine_similarity(a, b):
     return float(np.dot(a, b) / denom)
 
 
-def normalize_score(score, min_val=-1.0, max_val=1.0):
+def normalize_score(score, min_val=0.0, max_val=1.0):
+    """
+    Clamp a similarity score into [0, 1].
+    Both TF-IDF cosine similarity and the color-histogram image similarity
+    used in this project are already non-negative (0..1), so the default
+    range assumes that -- NOT the full cosine range of [-1, 1]. Using a
+    [-1, 1] range here would inflate weak/unrelated matches (e.g. a raw
+    score of 0.18 would incorrectly become 0.59), pushing them above the
+    "uncertain" confidence threshold.
+    """
     score = max(min_val, min(max_val, score))
     return (score - min_val) / (max_val - min_val)
 

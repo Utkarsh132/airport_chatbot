@@ -1,118 +1,180 @@
-# Airport Multimodal Passenger Assistance Chatbot
+# ✈️ Airport Multimodal Passenger Assistance Chatbot
 
-Proof-of-concept multimodal chatbot for airport passenger assistance (image, voice, text input).
+Proof-of-concept multimodal chatbot for airport passenger assistance (text, voice, and image input).
 Built for MSc AI coursework demonstrating the full multimodal AI pipeline: data acquisition,
 preprocessing, model design, multimodal fusion, evaluation, deployment, and ethics.
 
+---
+
 ## Architecture
 
-- **Vision**: CLIP (openai/clip-vit-base-patch32) embeddings + FAISS retrieval, with an offline
-  color-histogram fallback if torch/transformers are unavailable.
-- **Speech**: faster-whisper ("tiny" model by default), with a stub transcriber fallback for
-  fully offline demos.
-- **Text**: sentence-transformers (all-MiniLM-L6-v2) semantic retrieval + rule-based intent
-  classification and entity extraction, with a TF-IDF fallback.
-- **Fusion**: rule-based routing + weighted confidence merging across modalities (text, image,
-  voice, image+text, voice+image).
-- **Knowledge base**: 20 structured airport service/location records (JSON + CSV).
-- **UI**: Streamlit prototype with text/image/audio upload and confidence display.
+| Modality | Model | Fallback (offline) |
+|---|---|---|
+| Text | sentence-transformers `all-MiniLM-L6-v2` + rule-based intent classifier | TF-IDF cosine similarity |
+| Vision | CLIP `openai/clip-vit-base-patch32` + FAISS retrieval | Colour-histogram descriptor |
+| Speech | faster-whisper (`tiny` model) | Ground-truth transcript lookup |
+| Fusion | Weighted confidence merging across all active modalities | Same logic, lower scores |
 
-All heavy models are optional — set flags in `src/config.py` (`USE_CLIP`, `USE_WHISPER`,
-`USE_SENTENCE_TRANSFORMERS`) to `False` to run entirely offline with lightweight fallbacks.
-This was verified: the fallback-mode pipeline was tested end-to-end and correctly resolves both
-text and image queries to the right knowledge base record.
+**Knowledge base:** 20 structured airport service/location records (`data/knowledge_base/`).
+
+**UI:** Streamlit chat interface — single input bar with text, image upload, audio upload, camera, and live mic.
+
+---
 
 ## Project Structure
 
 ```
 airport_multimodal_chatbot/
-├── app/                    Streamlit UI + inference wrapper
-├── data/                   Images, audio metadata, text dataset, knowledge base
-├── src/                    Core pipeline modules (config, pipelines, fusion, evaluation)
-├── notebooks/              Notebook plans (see NOTEBOOK_PLANS.md)
-├── outputs/                Generated figures, metrics, predictions
-├── tests/                  Pytest smoke tests
-├── report_assets/          Report-ready writeup material
+├── app/
+│   ├── streamlit_app.py      # Streamlit UI
+│   ├── inference.py          # Inference wrapper (text/image/audio → result)
+│   └── ui_helpers.py         # UI formatting helpers
+├── data/
+│   ├── audio/                # 16 synthetic .wav files + audio_metadata.json
+│   ├── images/               # Synthetic sign images per KB category
+│   ├── knowledge_base/       # airport_kb.json + airport_kb.csv
+│   └── text/                 # passenger_queries.json (intent training data)
+├── src/
+│   ├── config.py             # All flags and constants (USE_CLIP, USE_WHISPER, etc.)
+│   ├── text_pipeline.py      # Intent classification + KB retrieval
+│   ├── image_pipeline.py     # CLIP / histogram image retrieval
+│   ├── audio_pipeline.py     # Whisper transcription
+│   ├── fusion.py             # Multimodal fusion engine
+│   ├── kb_retriever.py       # Knowledge base loader
+│   ├── evaluation.py         # Evaluation metrics
+│   ├── dataset_builder.py    # Synthetic data generation
+│   ├── data_loader.py        # Data loading utilities
+│   └── utils.py              # Shared helpers
+├── tests/
+│   └── test_pipeline.py      # 15 pytest smoke tests (all passing)
+├── outputs/
+│   ├── figures/              # Evaluation charts (confusion matrix, accuracy)
+│   └── metrics/              # Evaluation JSON/CSV results
+├── report_assets/            # Report writeup material (methodology, ethics, tables)
 ├── requirements.txt
-├── Dockerfile
-└── run_demo.py             CLI entry point
+├── run.py                    # CLI entry point
+└── README.md
 ```
 
-## Setup
+---
 
-Recommended Python version: 3.10 or 3.11 (3.12 also works, tested).
+## ⚡ Quick Setup (Recommended: conda)
+
+> Tested on Python 3.11, macOS (Apple Silicon) and Linux.
+> A conda environment is strongly recommended to avoid dependency conflicts with
+> `torch`, `faiss`, and `faster-whisper`.
+
+### Step 1 — Create the conda environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate       # Windows: venv\Scripts\activate
+conda create -n airport-chatbot python=3.11 -y
+conda activate airport-chatbot
+```
+
+### Step 2 — Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Lightweight mode (no heavy downloads, runs on any laptop)
+> First run will download model weights for CLIP (~350 MB), sentence-transformers (~90 MB),
+> and faster-whisper tiny (~75 MB). Requires internet on first run only; cached after that.
 
+### Step 3 — Launch the Streamlit app
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+Then open **http://localhost:8501** in your browser.
+
+---
+
+## 🖥️ Alternative: pip + venv (no conda)
+
+If you prefer a plain virtual environment:
+
+```bash
+python3.11 -m venv .env
+source .env/bin/activate        # Windows: .env\Scripts\activate
+pip install -r requirements.txt
+streamlit run app/streamlit_app.py
+```
+
+> **Note for Apple Silicon (M1/M2/M3):** if `torch` or `faiss-cpu` fail to install,
+> use conda (above) as it resolves Apple Silicon binaries automatically.
+
+---
+
+## 🔌 Offline / No-Internet Mode
+
+If there is no internet access, the app still runs using lightweight fallbacks.
 Edit `src/config.py` and set:
+
 ```python
 USE_CLIP = False
 USE_WHISPER = False
 USE_SENTENCE_TRANSFORMERS = False
 ```
-This uses TF-IDF for text retrieval and a color-histogram descriptor for images. No GPU,
-no internet download required after `pip install`.
 
-### Full-quality mode (recommended if you have time/bandwidth)
+This uses TF-IDF for text retrieval and a colour-histogram descriptor for images.
+No model downloads required. All 15 tests pass in this mode.
 
-Leave the flags as `True` (default) to use CLIP, Whisper, and sentence-transformers.
-First run will download model weights (~500MB-1.5GB total).
-
-## How to Run
-
-1. Generate the synthetic image dataset (first run only):
-   ```bash
-   python run_demo.py --build-data
-   ```
-
-2. Ask a question via CLI:
-   ```bash
-   python run_demo.py --query "Where is gate B12?"
-   python run_demo.py --image data/images/gate/gate_00.png
-   ```
-
-3. Run the full evaluation suite (saves tables/plots to outputs/):
-   ```bash
-   python run_demo.py --evaluate
-   ```
-
-4. Launch the Streamlit app:
-   ```bash
-   streamlit run app/streamlit_app.py
-   ```
-
-5. Run tests:
-   ```bash
-   pytest tests/test_pipeline.py -v
-   ```
-
-## Docker (optional)
+Alternatively, set the environment variable before running:
 
 ```bash
-docker build -t airport-chatbot .
-docker run -p 8501:8501 airport-chatbot
+TRANSFORMERS_OFFLINE=1 streamlit run app/streamlit_app.py
 ```
-Then open http://localhost:8501
+
+---
+
+## 🧪 Running Tests
+
+```bash
+conda activate airport-chatbot
+cd airport_multimodal_chatbot
+pytest tests/test_pipeline.py -v
+```
+
+Expected result: **15/15 passed**.
+
+---
+
+## 🖱️ CLI Usage
+
+```bash
+# Ask a text question
+python run.py --query "Where is gate B12?"
+
+# Query with an image
+python run.py --image data/images/restroom/restroom_00.png
+
+# Build/regenerate the synthetic image dataset
+python run.py --build-data
+
+# Run the full evaluation suite (saves results to outputs/)
+python run.py --evaluate
+```
+
+---
 
 ## Known Limitations
 
-- Image dataset is synthetic (generated sign-style cards), not real photographs — documented
-  as a dataset limitation per assignment requirements. Replace `data/images/<category>/` with
-  real or curated photos for higher realism.
-- No real .wav files are bundled; `data/audio/audio_metadata.json` provides ground-truth
-  transcripts used by the stub transcriber so the evaluation pipeline is demonstrable without
-  audio files. Add real recordings to `data/audio/` for genuine Whisper WER results.
-- Flight status queries (e.g., "Is my flight delayed?") are intentionally NOT resolved from the
-  static knowledge base, since real-time flight data requires a live airline/airport API —
-  the chatbot correctly returns an uncertainty message and redirects to official sources.
+- **Image dataset is synthetic** — generated sign-style icons, not real photographs.
+  Documented as a dataset limitation. Replace `data/images/<category>/` with real photos
+  for higher realism.
+- **Flight status queries** are intentionally not resolved from the static knowledge base
+  (e.g. "Is my flight delayed?"). The chatbot correctly returns an uncertainty message and
+  redirects to official sources, since real-time data requires a live airline API.
+- **Whisper on TTS-generated audio** occasionally mis-transcribes phonetically similar words
+  (e.g. "restroom" → "restaurant"). Real human speech performs more reliably.
+- **Confidence scores in offline mode** are lower than full-model mode (TF-IDF vs.
+  sentence-transformers) — the low-confidence threshold is calibrated accordingly in
+  `src/config.py`.
+
+---
 
 ## Ethics & Privacy
 
-See `report_assets/ethics.md` for the full discussion tied to this system's design (GDPR,
-data minimisation, accent bias, accessibility, human handover).
+See `report_assets/ethics.md` for the full discussion: GDPR compliance, data minimisation,
+accent/language bias, accessibility, and human handover design.

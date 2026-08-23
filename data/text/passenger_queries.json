@@ -2,18 +2,20 @@
   {
     "text": "Where is gate B12?",
     "intent": "find_gate",
-    "entities": {
-      "gate": "B12"
-    },
+    "entities": { "gate": "B12" },
     "kb_id": "KB001"
   },
   {
     "text": "Can you tell me how to get to gate A5?",
     "intent": "find_gate",
-    "entities": {
-      "gate": "A5"
-    },
-    "kb_id": "KB008"
+    "entities": { "gate": "A5" },
+    "kb_id": "KB001"
+  },
+  {
+    "text": "Where is gate C3?",
+    "intent": "find_gate",
+    "entities": { "gate": "C3" },
+    "kb_id": null
   },
   {
     "text": "How do I get to baggage claim?",
@@ -42,17 +44,13 @@
   {
     "text": "Is there a lounge near terminal 2?",
     "intent": "lounge",
-    "entities": {
-      "terminal": "Terminal 2"
-    },
+    "entities": { "terminal": "Terminal 2" },
     "kb_id": "KB007"
   },
   {
     "text": "Where can I relax before my flight in terminal 2?",
     "intent": "lounge",
-    "entities": {
-      "terminal": "Terminal 2"
-    },
+    "entities": { "terminal": "Terminal 2" },
     "kb_id": "KB007"
   },
   {
@@ -94,9 +92,7 @@
   {
     "text": "What time does flight LH123 depart?",
     "intent": "flight_status",
-    "entities": {
-      "flight": "LH123"
-    },
+    "entities": { "flight": "LH123" },
     "kb_id": null
   },
   {
@@ -120,9 +116,7 @@
   {
     "text": "Is there a restaurant open now near gate B12?",
     "intent": "restaurant",
-    "entities": {
-      "gate": "B12"
-    },
+    "entities": { "gate": "B12" },
     "kb_id": "KB009"
   },
   {
@@ -186,11 +180,309 @@
     "kb_id": "KB012"
   },
   {
-    "text": "Where is gate C3?",
-    "intent": "find_gate",
-    "entities": {
-      "gate": "C3"
-    },
+    "text": "Where do I drop off my checked bag?",
+    "intent": "baggage_drop",
+    "entities": {},
+    "kb_id": "KB027"
+  },
+  {
+    "text": "Where is the baggage drop counter?",
+    "intent": "baggage_drop",
+    "entities": {},
+    "kb_id": "KB027"
+  },
+  {
+    "text": "Where do I check in oversized luggage?",
+    "intent": "oversized_baggage",
+    "entities": {},
+    "kb_id": "KB028"
+  },
+  {
+    "text": "I have a surfboard, where do I check it in?",
+    "intent": "oversized_baggage",
+    "entities": {},
+    "kb_id": "KB028"
+  },
+  {
+    "text": "Is there a baggage wrapping service?",
+    "intent": "baggage_wrapping",
+    "entities": {},
+    "kb_id": "KB029"
+  },
+  {
+    "text": "Where are the self check-in kiosks?",
+    "intent": "self_checkin_kiosk",
+    "entities": {},
+    "kb_id": "KB030"
+  },
+  {
+    "text": "Can I store my bags somewhere while I wait?",
+    "intent": "bag_storage",
+    "entities": {},
+    "kb_id": "KB031"
+  },
+  {
+    "text": "Is there a left luggage facility?",
+    "intent": "bag_storage",
+    "entities": {},
+    "kb_id": "KB031"
+  },
+  {
+    "text": "What time does boarding start for my flight?",
+    "intent": "boarding_time",
+    "entities": {},
+    "kb_id": null
+  },
+  {
+    "text": "Has my gate changed?",
+    "intent": "gate_change",
+    "entities": {},
+    "kb_id": null
+  },
+  {
+    "text": "I have a connecting flight, where do I go?",
+    "intent": "transit_connection",
+    "entities": {},
+    "kb_id": "KB032"
+  },
+  {
+    "text": "Where is the transfer desk for connecting passengers?",
+    "intent": "transfer_desk",
+    "entities": {},
+    "kb_id": "KB032"
+  },
+  {
+    "text": "Where is the customs declaration desk?",
+    "intent": "customs",
+    "entities": {},
+    "kb_id": "KB026"
+  },
+  {
+    "text": "Do I need to declare anything at customs?",
+    "intent": "customs",
+    "entities": {},
+    "kb_id": "KB026"
+  },
+  {
+    "text": "Where do I get a visa on arrival?",
+    "intent": "visa_on_arrival",
+    "entities": {},
+    "kb_id": "KB017"
+  },
+  {
+    "text": "Where is the duty-free shop?",
+    "intent": "duty_free",
+    "entities": {},
+    "kb_id": "KB021"
+  },
+  {
+    "text": "Can I buy perfume after security?",
+    "intent": "duty_free",
+    "entities": {},
+    "kb_id": "KB021"
+  },
+  {
+    "text": "Where can I find shops in the terminal?",
+    "intent": "shopping",
+    "entities": {},
+    "kb_id": "KB033"
+  },
+  {
+    "text": "Where can I exchange money?",
+    "intent": "currency_exchange",
+    "entities": {},
+    "kb_id": "KB022"
+  },
+  {
+    "text": "Is there a currency exchange counter near departures?",
+    "intent": "currency_exchange",
+    "entities": {},
+    "kb_id": "KB022"
+  },
+  {
+    "text": "Where can I charge my phone?",
+    "intent": "charging_station",
+    "entities": {},
+    "kb_id": "KB023"
+  },
+  {
+    "text": "Is there a USB charging point near the gates?",
+    "intent": "charging_station",
+    "entities": {},
+    "kb_id": "KB023"
+  },
+  {
+    "text": "My phone is dead, where can I charge it?",
+    "intent": "charging_station",
+    "entities": {},
+    "kb_id": "KB023"
+  },
+  {
+    "text": "Where is a power outlet in the terminal?",
+    "intent": "charging_station",
+    "entities": {},
+    "kb_id": "KB023"
+  },
+  {
+    "text": "Is there somewhere to charge my laptop?",
+    "intent": "charging_station",
+    "entities": {},
+    "kb_id": "KB023"
+  },
+  {
+    "text": "My battery is low, where do I find a socket?",
+    "intent": "charging_station",
+    "entities": {},
+    "kb_id": "KB023"
+  },
+  {
+    "text": "How do I connect to the airport Wi-Fi?",
+    "intent": "wifi",
+    "entities": {},
+    "kb_id": "KB023"
+  },
+  {
+    "text": "Where can I get a luggage trolley?",
+    "intent": "luggage_trolley",
+    "entities": {},
+    "kb_id": "KB003"
+  },
+  {
+    "text": "Where is the nearest coffee shop?",
+    "intent": "coffee_shop",
+    "entities": {},
+    "kb_id": "KB009"
+  },
+  {
+    "text": "Is there halal food available at the airport?",
+    "intent": "halal_food",
+    "entities": {},
+    "kb_id": "KB009"
+  },
+  {
+    "text": "Where can I refill my water bottle?",
+    "intent": "water_fountain",
+    "entities": {},
+    "kb_id": "KB009"
+  },
+  {
+    "text": "Where are the vending machines?",
+    "intent": "vending_machine",
+    "entities": {},
+    "kb_id": "KB009"
+  },
+  {
+    "text": "Is there a hotel inside the airport?",
+    "intent": "hotel_airside",
+    "entities": {},
+    "kb_id": "KB035"
+  },
+  {
+    "text": "Is there a rest area or sleep pods?",
+    "intent": "sleeping_area",
+    "entities": {},
+    "kb_id": "KB035"
+  },
+  {
+    "text": "Where is the smoking area?",
+    "intent": "smoking_area",
+    "entities": {},
+    "kb_id": "KB024"
+  },
+  {
+    "text": "Can I smoke inside the terminal?",
+    "intent": "smoking_area",
+    "entities": {},
+    "kb_id": "KB024"
+  },
+  {
+    "text": "Is there a play area for children?",
+    "intent": "kids_play_area",
+    "entities": {},
+    "kb_id": "KB034"
+  },
+  {
+    "text": "Where can I take a shower?",
+    "intent": "shower_facility",
+    "entities": {},
+    "kb_id": "KB036"
+  },
+  {
+    "text": "Where is the parking garage?",
+    "intent": "parking",
+    "entities": {},
+    "kb_id": "KB025"
+  },
+  {
+    "text": "How much does airport parking cost?",
+    "intent": "parking",
+    "entities": {},
+    "kb_id": "KB025"
+  },
+  {
+    "text": "Which bus goes to the city centre?",
+    "intent": "bus_stop",
+    "entities": {},
+    "kb_id": "KB018"
+  },
+  {
+    "text": "Where do I get picked up by Uber?",
+    "intent": "uber_pickup",
+    "entities": {},
+    "kb_id": "KB038"
+  },
+  {
+    "text": "Where is the ride-hailing pickup zone?",
+    "intent": "uber_pickup",
+    "entities": {},
+    "kb_id": "KB038"
+  },
+  {
+    "text": "Is there a shuttle to nearby hotels?",
+    "intent": "hotel_shuttle",
+    "entities": {},
+    "kb_id": "KB018"
+  },
+  {
+    "text": "Where is the nearest emergency exit?",
+    "intent": "emergency_exit",
+    "entities": {},
+    "kb_id": null
+  },
+  {
+    "text": "Where is the airport police station?",
+    "intent": "police_desk",
+    "entities": {},
+    "kb_id": "KB037"
+  },
+  {
+    "text": "I've lost my child, who do I contact?",
+    "intent": "lost_child",
+    "entities": {},
+    "kb_id": "KB037"
+  },
+  {
+    "text": "I see an unattended bag, who do I report it to?",
+    "intent": "unattended_baggage",
+    "entities": {},
+    "kb_id": "KB037"
+  },
+  {
+    "text": "Can you book a flight for me?",
+    "intent": "out_of_scope",
+    "entities": {},
+    "kb_id": null
+  },
+  {
+    "text": "What's the weather like in London?",
+    "intent": "out_of_scope",
+    "entities": {},
+    "kb_id": null
+  },
+  {
+    "text": "Do I need a visa to travel to Japan?",
+    "intent": "out_of_scope",
+    "entities": {},
     "kb_id": null
   }
 ]

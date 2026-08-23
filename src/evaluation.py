@@ -95,10 +95,8 @@ def evaluate_speech() -> dict:
     wers = []
 
     for entry in meta:
-        # NOTE: actual .wav files are not bundled in this proof-of-concept repo;
-        # transcribe_audio() will gracefully fall back to the stub transcriber,
-        # which returns the ground truth (demonstrating the evaluation logic).
-        # Replace data/audio/*.wav with real recordings to get genuine Whisper WER.
+        # No real .wav files bundled -- stub transcriber returns ground-truth transcripts.
+        # Replace data/audio/*.wav with real recordings for genuine Whisper WER.
         fake_path = os.path.join("data", "audio", entry["file"])
         result = transcribe_audio(fake_path)
         hypothesis = result["text"] or entry["transcript_ground_truth"]

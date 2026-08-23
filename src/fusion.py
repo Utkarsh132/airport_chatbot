@@ -149,7 +149,17 @@ class MultimodalFusionEngine:
                         candidate_record = image_branch["record"]
                         candidate_score = image_branch["score"]
 
-        uncertain = candidate_score < CONFIDENCE_LOW_THRESHOLD or candidate_record is None
+        # Flight-status queries always redirect -- no live flight data in the static KB.
+        is_flight_status = bool(text_branch) and text_branch["nlp"]["intent"] == "flight_status"
+        if is_flight_status:
+            candidate_record = None
+            candidate_score = 0.0
+            rationale_parts = [
+                "Detected a flight-status intent; this requires live airline/airport "
+                "data that is not available in the static knowledge base."
+            ]
+
+        uncertain = is_flight_status or candidate_score < CONFIDENCE_LOW_THRESHOLD or candidate_record is None
 
         response = {
             "input_summary": {
@@ -169,7 +179,13 @@ class MultimodalFusionEngine:
             },
         }
 
-        if uncertain:
+        if is_flight_status:
+            response["message"] = (
+                "I can't check live flight status -- that needs real-time airline data. "
+                "Please check the official airport app, departure/arrival display screens, "
+                "or your airline directly for the most accurate information."
+            )
+        elif uncertain:
             response["message"] = (
                 "I'm not fully confident about this answer. Please visit the nearest "
                 "Information Desk or check the official airport app/display screens "
