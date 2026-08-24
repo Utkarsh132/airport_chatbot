@@ -1,4 +1,4 @@
-# ✈️ Airport Multimodal Passenger Assistance Chatbot
+#  Airport Multimodal Passenger Assistance Chatbot
 
 Proof-of-concept multimodal chatbot for airport passenger assistance (text, voice, and image input).
 Built for MSc AI coursework demonstrating the full multimodal AI pipeline: data acquisition,
