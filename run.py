@@ -2,10 +2,10 @@
 End-to-end command-line demo runner.
 
 Usage:
-    python run_demo.py --build-data      # generate synthetic images (first run only)
-    python run_demo.py --evaluate        # run full evaluation suite, save outputs/
-    python run_demo.py --query "Where is gate B12?"
-    python run_demo.py --image data/images/gate/gate_00.png --query "Where is this?"
+    python run.py --build-data      # generate synthetic images (first run only)
+    python run.py --evaluate        # run full evaluation suite, save outputs/
+    python run.py --query "Where is gate B12?"
+    python run.py --image data/images/gate/gate_00.png --query "Where is this?"
 """
 
 import argparse
