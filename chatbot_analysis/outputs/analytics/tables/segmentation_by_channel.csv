@@ -1,5 +1,0 @@
-channel,turns,csat_mean,fallback_rate,avg_rt_ms
-in_terminal_wifi,99,3.919,0.02,1031.758
-kiosk,143,4.0,0.07,1045.266
-mobile_app,762,3.82,0.096,1212.644
-web,462,3.922,0.067,915.773

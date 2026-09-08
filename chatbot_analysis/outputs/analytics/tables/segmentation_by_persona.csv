@@ -1,6 +1,0 @@
-persona,turns,sessions,users,csat_mean,fallback_rate,intent_accuracy,avg_rt_ms
-business,431,117,46,3.803,0.095,0.719,1129.367
-family,210,65,30,3.852,0.076,0.719,1042.51
-first_time,137,41,27,4.036,0.051,0.818,1042.708
-leisure,397,114,75,4.03,0.063,0.801,1092.627
-transit,291,83,38,3.718,0.093,0.694,1087.392
