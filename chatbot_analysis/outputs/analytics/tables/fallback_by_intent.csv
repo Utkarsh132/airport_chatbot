@@ -1,0 +1,16 @@
+true_intent,fallback_rate_%
+out_of_scope,100.0
+emergency_exit,47.1
+halal_food,45.5
+baggage_wrapping,42.9
+lost_child,40.7
+gate_change,33.3
+self_checkin_kiosk,33.3
+medical_assistance,33.3
+police_desk,28.6
+immigration,27.0
+visa_on_arrival,25.0
+transit_connection,25.0
+transfer_desk,24.6
+hotel_airside,22.2
+hotel_shuttle,22.2

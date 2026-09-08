@@ -1,0 +1,6 @@
+persona,top5_intents
+business,"['charging_station', 'transfer_desk', 'lounge', 'transit_connection', 'flight_status']"
+family,"['kids_play_area', 'family_room', 'restaurant', 'baggage_claim', 'restroom']"
+first_time,"['check_in', 'find_gate', 'currency_exchange', 'customs', 'security']"
+leisure,"['restroom', 'restaurant', 'boarding_time', 'currency_exchange', 'find_gate']"
+transit,"['shower_facility', 'immigration', 'charging_station', 'transit_connection', 'transfer_desk']"

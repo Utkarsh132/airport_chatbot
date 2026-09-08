@@ -1,0 +1,27 @@
+session_id,turn_index,persona,utterance,true_intent,predicted_intent,is_fallback,csat
+S56086deafd,0,business,"still I have a connecting flight, where do I go? for the third time,",transit_connection,find_gate,False,1
+S56086deafd,1,business,Where do I get a visa on arrival?,visa_on_arrival,fallback,True,1
+S56086deafd,2,business,"Is there a shuttle to nearby hotels? for the third time,",hotel_shuttle,hotel_shuttle,False,4
+S56086deafd,3,business,Do I need a visa to travel to Japan?,out_of_scope,fallback,True,1
+S56086deafd,4,business,Where can I find airport transport?,transport,transport,False,5
+S56086deafd,5,business,Where is gate C3?,find_gate,find_gate,False,4
+S922f365cb5,0,transit,Where do I go through passport control?,immigration,fallback,True,1
+S922f365cb5,1,transit,Where is the customs declaration desk?,customs,baggage_claim,False,2
+S922f365cb5,2,transit,Where do I pick up my luggage?,baggage_claim,baggage_claim,False,5
+S922f365cb5,3,transit,Where can I take a shower?,shower_facility,shower_facility,False,4
+S922f365cb5,4,transit,Where can I find shops in the terminal? this is useless,shopping,duty_free,False,1
+Sc7ad77b4bd,0,leisure,Where can I refill my water bottle?,water_fountain,restroom,False,2
+Sc7ad77b4bd,1,leisure,Is there a currency exchange counter near departures?,currency_exchange,atm,False,3
+Sc7ad77b4bd,2,leisure,Where can I pray at the airport?,prayer_room,sleeping_area,False,2
+Sc7ad77b4bd,3,leisure,Can I buy perfume after security? why is this so hard,duty_free,duty_free,False,4
+S3726e528fc,0,business,Where is the transfer desk for connecting passengers?,transfer_desk,fallback,True,1
+S3726e528fc,1,business,still Where is the transfer desk for connecting passengers? just tell me,transfer_desk,fallback,True,1
+S3726e528fc,2,business,How long is the security line right now?,security,security,False,5
+S3726e528fc,3,business,Where do I pick up my luggage? seriously?,baggage_claim,restroom,False,1
+S9ea357a6d3,0,business,Where can I rent a car?,car_rental,transport,False,2
+S9ea357a6d3,1,business,What time does boarding start for my flight?,boarding_time,boarding_time,False,5
+S9ea357a6d3,2,business,"My battery is low, where do I find a socket?",charging_station,fallback,True,1
+S9ea357a6d3,3,business,again Where is the transfer desk for connecting passengers?,transfer_desk,fallback,True,1
+Sc792d07941,0,business,"I've lost my child, who do I contact?",lost_child,fallback,True,1
+Sc792d07941,1,business,Is there a hotel inside the airport?,hotel_airside,lounge,False,3
+Sc792d07941,2,business,one more time Where is the baggage drop counter?,baggage_drop,baggage_drop,False,4
